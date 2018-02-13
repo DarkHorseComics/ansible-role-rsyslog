@@ -6,8 +6,8 @@
 - name: Reconfigure the stock syslogd(8) on OpenBSD
   include_tasks: configure-OpenBSD-syslogd.yml
   when:
-    - ansible_os_family == "OpenBSD"
-    - "local" in rsyslog_mode
+    - "ansible_os_family == 'OpenBSD'"
+    - "'local' in rsyslog_mode"
 
 - include_tasks: "install-{{ ansible_os_family }}.yml"
 
