@@ -20,13 +20,12 @@ module(
 {% endif %}
 {% endif %}
 
-$PreserveFQDN on
-$DirCreateMode 0755
+$PreserveFQDN {{ rsyslog_config_PreserveFQDN }}
 $FileOwner {{ rsyslog_config_FileOwner }}
 $FileGroup {{ rsyslog_config_FileGroup }}
-$FileCreateMode 0640
-$DirCreateMode 0755
-$Umask 0022
+$FileCreateMode {{ rsyslog_config_FileCreateMode }}
+$DirCreateMode {{ rsyslog_config_DirCreateMode }}
+$Umask {{ rsyslog_config_Umask }}
 
 
 $WorkDirectory {{ rsyslog_config_WorkDirectory }}

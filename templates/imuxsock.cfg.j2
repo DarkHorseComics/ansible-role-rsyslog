@@ -1,0 +1,11 @@
+input(
+  type="imuxsock"
+  Socket="{{ item.value.path }}"
+  IgnoreOwnMessages="{{ item.value.ignore_own_messages | default(rsyslog_imuxsock_IgnoreOwnMessages) }}"
+  FlowControl="{{ item.value.flow_control | default(rsyslog_imuxsock_FlowControl)  }}"
+  UsePIDFromSystem="{{ item.value.use_system_pid | default(rsyslog_imuxsock_UsePidFromSystem)  }}"
+  CreatePath="{{ item.value.create_path | default(rsyslog_imuxsock_CreatePath)  }}"
+  {% if item.value.host_name is defined -%}
+  HostName="{{ item.value.host_name }}"
+  {% endif -%}
+)

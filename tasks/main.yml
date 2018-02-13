@@ -36,12 +36,22 @@
   when: '"local" in rsyslog_mode'
 
 - name: Create imfile inputs
-  # XXX you cannot validate imfile flagments because they are not a valid
+  # XXX you cannot validate imfile fragments because they are not a valid
   # config themselves
   template:
     src: imfile.cfg.j2
     dest: "{{ rsyslog_conf_dir }}/900_{{ item.key }}.cfg"
   with_dict: "{{ rsyslog_imfile_inputs }}"
+  notify:
+    - Restart rsyslog
+
+- name: Create imuxsock inputs
+  # XXX you cannot validate imfile fragments because they are not a valid
+  # config themselves
+  template:
+    src: imuxsock.cfg.j2
+    dest: "{{ rsyslog_conf_dir }}/900_{{ item.key }}.cfg"
+  with_dict: "{{ rsyslog_imuxsock_inputs }}"
   notify:
     - Restart rsyslog
 

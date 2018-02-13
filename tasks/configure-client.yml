@@ -3,7 +3,8 @@
 - name: Create 200_client.cfg
   template:
     src: 200_client.cfg.j2
-    dest: "{{ rsyslog_conf_dir }}/200_client.cfg"
+    dest: "{{ rsyslog_conf_dir }}/200_client_{{ item.key }}.cfg"
     validate: "{{ rsyslog_bin }} -N 1 -f %s"
+  with_dict: "{{ rsyslog_remote_servers }}"
   notify:
     - Restart rsyslog
