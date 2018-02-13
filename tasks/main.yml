@@ -4,12 +4,12 @@
 - include_vars: "{{ ansible_os_family }}.yml"
 
 - name: Reconfigure the stock syslogd(8) on OpenBSD
-  import_tasks: configure-OpenBSD-syslogd.yml
+  include_tasks: configure-OpenBSD-syslogd.yml
   when:
     - ansible_os_family == "OpenBSD"
     - "local" in rsyslog_mode
 
-- import_tasks: "install-{{ ansible_os_family }}.yml"
+- include_tasks: "install-{{ ansible_os_family }}.yml"
 
 - name: Create WorkDirectory
   file:
@@ -24,16 +24,16 @@
     state: directory
 
 - name: Configure as client
-  import_tasks: configure-client.yml
-  when: "client" in rsyslog_mode
+  include: configure-client.yml
+  when: "'client' in rsyslog_mode"
 
 - name: Configure as server
-  import_tasks: configure-server.yml
-  when: "server" in rsyslog_mode
+  include: configure-server.yml
+  when: "'server' in rsyslog_mode"
 
 - name: Configure as local
-  import_tasks: configure-local.yml
-  when: "local" in rsyslog_mode
+  include: configure-local.yml
+  when: "'local' in rsyslog_mode"
 
 - name: Create imfile inputs
   # XXX you cannot validate imfile fragments because they are not a valid
