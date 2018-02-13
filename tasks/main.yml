@@ -24,15 +24,15 @@
     state: directory
 
 - name: Configure as client
-  include: configure-client.yml
+  include_tasks: configure-client.yml
   when: "'client' in rsyslog_mode"
 
 - name: Configure as server
-  include: configure-server.yml
+  include_tasks: configure-server.yml
   when: "'server' in rsyslog_mode"
 
 - name: Configure as local
-  include: configure-local.yml
+  include_tasks: configure-local.yml
   when: "'local' in rsyslog_mode"
 
 - name: Create imfile inputs
