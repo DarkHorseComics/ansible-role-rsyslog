@@ -2,5 +2,9 @@ input(
   type="imfile"
   File="{{ item.value.path }}"
   Tag="{{ item.value.tag }}"
-  Facility="{{ item.value.facility }}"
+  Facility="{{ item.value.facility | default(rsyslog_imfile_Facility)  }}"
+  Severity="{{ item.value.severity | default(rsyslog_imfile_Severity) }}"
+  {% if item.value.persistent_state_interval is defined -%}
+  PersistentStateInterval="{{ item.value.persistent_state_interval }}"
+  {% endif -%}
 )

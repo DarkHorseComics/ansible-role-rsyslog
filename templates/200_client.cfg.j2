@@ -1,8 +1,17 @@
-{% for server in rsyslog_remote_servers -%}
 $ActionQueueType LinkedList
-$ActionQueueFileName {{ server }}-queue
-$ActionResumeRetryCount -1
+$ActionQueueFileName {{ item.value.host }}-queue
+$ActionResumeRetryCount {{ item.value.retry_count | default(rsyslog_client_RetryCount) }}
 $ActionQueueSaveOnShutdown on
+{% if item.value.queue_quota is defined -%}
+$ActionQueueMaxDiskSpace {{ item.value.queue_quota }}
+{% endif -%}
 
-*.* @@{{ server }};RSYSLOG_ForwardFormat
-{% endfor -%}
+{{ item.value.facilities | default(rsyslog_client_Facilities) -}}
+.
+{{- item.value.severities | default(rsyslog_client_Severities) -}}
+ {# <-- this space on this line is syntactic, it must be preserved #}
+{{- '@' if item.value.transport == 'udp' else '@@' }}
+{{ item.value.host -}}
+:
+{{- item.value.port | default(rsyslog_client_Port) -}}
+;RSYSLOG_ForwardFormat
