@@ -21,9 +21,9 @@ rsyslog_default_syslog_service_name: "{{ __rsyslog_default_syslog_service_name }
 rsyslog_config_WorkDirectory: "/var/spool/rsyslog"
 rsyslog_config_FileOwner: "{{ __rsyslog_config_FileOwner }}"
 rsyslog_config_FileGroup: "{{ __rsyslog_config_FileGroup }}"
-rsyslog_config_FileCreateMode: 0640
-rsyslog_config_DirCreateMode: 0755
-rsyslog_config_Umask: 0022
+rsyslog_config_FileCreateMode: '0640'
+rsyslog_config_DirCreateMode: '0755'
+rsyslog_config_Umask: '0022'
 rsyslog_config_PreserveFQDN: 'on'
 
 rsyslog_imfile_inputs: {}
@@ -32,15 +32,10 @@ rsyslog_imfile_Facility: 'local0'
 rsyslog_imfile_Severity: 'notice'
 
 rsyslog_imuxsock_inputs: {}
-rsyslog_imuxsock_IgnoreOwnMesages: 'on'
+rsyslog_imuxsock_IgnoreOwnMessages: 'on'
 rsyslog_imuxsock_FlowControl: 'off'
 rsyslog_imuxsock_UsePIDFromSystem: 'on'
 rsyslog_imuxsock_CreatePath: 'off'
-
-rsyslog_imfile_IgnoreOwnMessages: 'off'
-rsyslog_imfile_FlowControl: 'off'
-rsyslog_imfile_UsePidFromSystem: 'on'
-rsyslog_imfile_CreatePath: 'off'
 
 rsyslog_server_config_AllowedSender: []
 rsyslog_server_config_listen_port: "{{ __rsyslog_server_config_listen_port }}"
