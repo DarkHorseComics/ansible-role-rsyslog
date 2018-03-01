@@ -8,9 +8,7 @@ $ActionQueueMaxDiskSpace {{ item.value.queue_quota }}
 
 {{ item.value.facilities | default(rsyslog_client_Facilities) -}}
 .
-{{- item.value.severities | default(rsyslog_client_Severities) -}}
- {# <-- this space on this line is syntactic, it must be preserved #}
-{{- '@' if item.value.transport == 'udp' else '@@' }}
+{{- item.value.severities | default(rsyslog_client_Severities) }} {{ '@' if item.value.transport == 'udp' else '@@' -}}
 {{ item.value.host -}}
 :
 {{- item.value.port | default(rsyslog_client_Port) -}}
